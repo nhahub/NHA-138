@@ -1,0 +1,1351 @@
+/* Container */
+.container {
+  min-height: 100vh;
+  background: var(--input-color);
+  color: var(--main-text-white);
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+}
+.container[dir="rtl"] {
+  font-family: var(--font-cairo), 'Noto Sans Arabic', sans-serif;
+}
+
+/* Navigation */
+.nav {
+  background: var(--main-color-transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--input-border-color);
+  padding: 16px 0;
+  width: 100%;
+  display: flex;
+}
+
+.navContainer {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--main-color-transparent);
+  text-decoration: none;
+  background: linear-gradient(to right, var(--gradient-blue-start), var(--gradient-blue-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navText {
+  color: var(--p-text);
+  font-size: 14px;
+}
+
+.loginLink {
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.loginLink:hover {
+  color: var(--accent-blue-hover);
+}
+
+/* Progress Bar */
+.progressBar {
+  background: var(--sections-color);
+  padding: 24px 0;
+}
+
+.progressContainer {
+  max-width: 600px;
+  margin: 0 auto;
+  height: 4px;
+  background: var(--input-border-color);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(to left, var(--gradient-blue-start), var(--gradient-blue-end));
+  transition: width 0.3s ease;
+}
+
+/* Main Content */
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Wider container for university student step 3 (goals and skills) */
+.formContainer:has(.skillsGrid),
+.formContainer:has(.goalsCard) {
+  max-width: 900px;
+}
+
+.stepContent {
+  background: var(--from-wrapper-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: 12px;
+  padding: 48px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Typography */
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 16px;
+}
+
+.stepTitle {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 16px;
+}
+
+.subtitle {
+  color: var(--p-text);
+  font-size: 18px;
+  margin: 0 0 32px;
+  text-align: center;
+}
+
+/* User Type Selection */
+.userTypeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.userTypeCard {
+  background: var(--input-color);
+  border: 2px solid var(--input-border-color);
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: inherit;
+}
+
+.userTypeCard:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.userTypeIcon {
+  font-size: 48px;
+  color: var(--accent-color);
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.userTypeTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--main-text-white-lighter);
+}
+
+.userTypeDesc {
+  color: var(--p-text);
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.adminLink {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.adminLink p {
+  color: var(--p-text);
+  font-size: 14px;
+  margin: 0;
+}
+
+.adminLink a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.adminLink a:hover {
+  color: var(--accent-blue-hover);
+  text-decoration: underline;
+}
+
+/* Form Styles */
+.form {
+  margin-top: 32px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.formGroup {
+  margin-bottom: 24px;
+}
+
+.formGroup label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--main-text-white-lighter);
+  margin-bottom: 8px;
+}
+
+.formGroup input,
+.formGroup select {
+  width: 100%;
+  background: var(--input-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: var(--main-text-white);
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--accent-blue-bg);
+}
+
+.formGroup input::placeholder {
+  color: var(--input-text);
+}
+
+/* Input Error State */
+.inputError {
+  border-color: var(--error) !important;
+}
+
+.errorMessage {
+  color: var(--error);
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+/* Phone Input Customization */
+.phoneInput {
+  width: 100%;
+}
+
+.phoneInput input {
+  width: 100%;
+  background: var(--input-color) !important;
+  border: 1px solid var(--input-border-color) !important;
+  border-radius: 6px !important;
+  padding: 12px 16px 12px 50px !important;
+  color: var(--main-text-white) !important;
+  font-size: 16px !important;
+}
+
+.phoneInputError input {
+  border-color: var(--error) !important;
+}
+
+/* Form Actions */
+.formActions {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  margin-top: 32px;
+}
+
+.backButton,
+.nextButton,
+.submitButton {
+  padding: 12px 32px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.backButton {
+  background: transparent;
+  color: var(--p-text);
+  border: 1px solid var(--input-border-color);
+}
+
+.backButton:hover {
+  border-color: var(--p-text);
+  color: var(--main-text-white-lighter);
+}
+
+.nextButton,
+.submitButton {
+  background: var(--btn-primary);
+  color: white;
+  flex: 1;
+}
+
+.nextButton:hover,
+.submitButton:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--success-bg);
+}
+
+/* Verification Section */
+.verificationContainer {
+  margin-top: 32px;
+}
+
+.verificationCard,
+.verifiedCard {
+  background: var(--input-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+}
+
+.verificationIcon {
+  font-size: 64px;
+  margin-bottom: 24px;
+}
+
+.verificationTitle,
+.verifiedTitle {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 12px;
+  color: var(--main-text-white-lighter);
+}
+
+.verificationDesc,
+.verifiedDesc {
+  color: var(--p-text);
+  margin: 0 0 24px;
+}
+
+/* Verification Steps */
+.verificationSteps {
+  background: var(--from-wrapper-color);
+  border-radius: 8px;
+  padding: 24px;
+  margin: 32px 0;
+  text-align: right;
+}
+
+.verStep {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.verStep:last-child {
+  margin-bottom: 0;
+}
+
+.verStepNumber {
+  background: var(--accent-blue);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.verStep p {
+  margin: 0;
+  color: var(--main-text-white);
+}
+
+.verifyButton {
+  width: 100%;
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 16px;
+}
+
+.verifyButton:hover {
+  background: var(--accent-blue-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--accent-blue);
+}
+
+/* Success Icon */
+.successIcon {
+  font-size: 64px;
+  margin-bottom: 24px;
+}
+
+/* Additional Form */
+.additionalForm {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--input-border-color);
+}
+
+/* Preferences Card */
+.preferencesCard,
+.goalsCard {
+  background: var(--input-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 24px;
+  transition: all 0.3s;
+}
+
+.goalsCard:hover {
+  border-color: var(--accent-blue);
+  box-shadow: 0 4px 12px var(--accent-blue-bg);
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 12px;
+  color: var(--main-text-white-lighter);
+  background: linear-gradient(to left, var(--gradient-blue-start), var(--gradient-blue-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cardDesc {
+  color: var(--p-text);
+  font-size: 14px;
+  margin: 0 0 20px;
+  line-height: 1.6;
+}
+
+.subjectsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: var(--main-text-white);
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: all 0.2s;
+  background: var(--from-wrapper-color);
+  border: 1px solid var(--input-border-color);
+}
+
+.checkboxLabel:hover {
+  background: var(--accent-blue-bg);
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
+}
+
+.checkboxLabel input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: var(--accent-blue);
+}
+
+.checkboxLabel input[type="checkbox"]:checked + span {
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+
+.checkboxLabel span {
+  transition: all 0.2s;
+}
+
+.goalSelect {
+  width: 100%;
+  background: var(--from-wrapper-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: 8px;
+  padding: 14px 16px;
+  color: var(--main-text-white);
+  font-size: 16px;
+  margin-top: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.goalSelect:hover {
+  border-color: var(--accent-blue);
+  background: var(--accent-blue-bg);
+}
+
+.goalSelect:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--accent-blue-bg);
+}
+
+/* Children Note */
+.childrenNote {
+  background: var(--accent-blue-bg);
+  border: 1px solid var(--accent-blue);
+  border-radius: 8px;
+  padding: 16px;
+  color: var(--accent-blue);
+  font-size: 14px;
+  margin-top: 16px;
+  text-align: center;
+}
+
+/* Terms Section */
+.termsCard {
+  background: var(--input-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 24px;
+}
+
+.termsContent {
+  margin-bottom: 24px;
+}
+
+.termsTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 16px;
+  color: var(--main-text-white-lighter);
+}
+
+.termsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.termsList li {
+  color: var(--p-text);
+  margin-bottom: 12px;
+  line-height: 1.5;
+  position: relative;
+  padding-right: 24px;
+}
+
+.termsList li::before {
+  content: '✓';
+  position: absolute;
+  right: 0;
+  color: var(--success);
+  font-weight: bold;
+}
+
+.termsCheckbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  color: var(--main-text-white);
+}
+
+.termsCheckbox input[type="checkbox"] {
+  margin-top: 2px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.checkboxError {
+  outline: 2px solid var(--error);
+  outline-offset: 2px;
+}
+
+.termsCheckbox a {
+  color: var(--accent-blue);
+  text-decoration: none;
+}
+
+.termsCheckbox a:hover {
+  text-decoration: underline;
+}
+
+.newsletterCard {
+  background: var(--input-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 32px;
+}
+
+.newsletterCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  color: var(--main-text-white);
+}
+
+.newsletterCheckbox input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+/* Success State */
+.successContent {
+  text-align: center;
+  padding: 64px 48px;
+  background: var(--from-wrapper-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: 12px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.successAnimation {
+  margin-bottom: 32px;
+}
+
+/* Animated Checkmark */
+.successCheckmark {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--btn-primary);
+  margin: 0 auto;
+  position: relative;
+  animation: scaleIn 0.3s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.checkIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 4rem;
+  transform: translate(-50%, -50%);
+}
+
+.iconLineTip {
+  position: absolute;
+  width: 4px;
+  height: 16px;
+  background: white;
+  left: 14px;
+  top: 18px;
+  transform: rotate(45deg);
+  animation: checkTip 0.3s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+.iconLineLong {
+  position: absolute;
+  width: 4px;
+  height: 32px;
+  background: white;
+  left: 26px;
+  top: 6px;
+  transform: rotate(-45deg);
+  animation: checkLong 0.3s ease-out 0.5s forwards;
+  opacity: 0;
+}
+
+@keyframes checkTip {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes checkLong {
+  to {
+    opacity: 1;
+  }
+}
+
+.successTitle {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: var(--main-text-white-lighter);
+}
+
+.successText {
+  color: var(--p-text);
+  font-size: 18px;
+  margin: 0 0 8px;
+}
+
+.successSubtext {
+  font-size: 16px;
+  margin: 0 0 32px;
+  color: var(--p-text);
+}
+
+.loginButton {
+  display: inline-block;
+  background: var(--btn-primary);
+  color: white;
+  text-decoration: none;
+  padding: 16px 48px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.loginButton:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--success-bg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .stepContent {
+    padding: 32px 24px;
+  }
+  
+  .title {
+    font-size: 28px;
+  }
+  
+  .stepTitle {
+    font-size: 24px;
+  }
+  
+  .subtitle {
+    font-size: 16px;
+  }
+  
+  .userTypeGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .userTypeCard {
+    padding: 24px 20px;
+  }
+  
+  .userTypeIcon {
+    font-size: 40px;
+  }
+  
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+  
+  .subjectsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .formActions {
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+  
+  .backButton,
+  .nextButton {
+    width: 100%;
+  }
+  
+  .verificationSteps {
+    padding: 16px;
+  }
+  
+  .verStep {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .summaryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .fileUploadLabel {
+    padding: 1.5rem;
+  }
+
+  .uploadIcon {
+    font-size: 2.5rem;
+  }
+
+  .pendingIcon {
+    font-size: 4rem;
+  }
+
+  .pendingInfo {
+    padding: 1rem;
+  }
+
+  .skillsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .subjectsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 24px 16px;
+  }
+  
+  .stepContent {
+    padding: 24px 16px;
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+  
+  .stepTitle {
+    font-size: 20px;
+  }
+  
+  .verificationCard,
+  .verifiedCard {
+    padding: 24px 16px;
+  }
+  
+  .verificationIcon,
+  .successIcon {
+    font-size: 48px;
+  }
+  
+  .termsCard {
+    padding: 24px 16px;
+  }
+  
+  .termsList {
+    font-size: 14px;
+  }
+  
+  .successTitle {
+    font-size: 24px;
+  }
+  
+  .successText {
+    font-size: 16px;
+  }
+
+  .skillsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .goalsCard {
+    padding: 24px 16px;
+  }
+}
+
+/* Loading states */
+.formGroup input:disabled,
+.formGroup select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Focus styles for accessibility */
+.formGroup input:focus-visible,
+.formGroup select:focus-visible,
+.backButton:focus-visible,
+.nextButton:focus-visible,
+.submitButton:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+.formGroup select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238b949e' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 12px center;
+  padding-left: 32px;
+}
+
+.passwordStrength {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.strengthBar {
+  flex: 1;
+  height: 4px;
+  background: var(--input-border-color);
+  border-radius: 2px;
+  transition: background 0.3s;
+}
+
+.strengthBar.weak {
+  background: var(--error);
+}
+
+.strengthBar.medium {
+  background: var(--warning);
+}
+
+.strengthBar.strong {
+  background: var(--success);
+}
+
+/* Smooth transitions */
+.formGroup input,
+.formGroup select,
+.backButton,
+.nextButton,
+.submitButton,
+.checkboxLabel,
+.userTypeCard {
+  transition-property: background-color, border-color, color, transform, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+
+.loadingMessage {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.spinner {
+  border: 4px solid var(--input-border-color);
+  border-top: 4px solid var(--accent-blue);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.smallText {
+  font-size: 14px;
+  color: var(--black-trans);
+  margin-top: 10px;
+}
+
+.verificationStatus {
+  text-align: center;
+  padding: 2rem;
+}
+
+.loadingSpinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--main-text-white-lighter);
+  border-top: 4px solid var(--accent-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.statusMessage {
+  font-size: 1.1rem;
+  color: var(--borders);
+  margin-bottom: 1rem;
+}
+
+.redirectMessage {
+  font-size: 0.9rem;
+  color: var(--black-trans);
+  font-style: italic;
+}
+
+.retryButton {
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.retryButton:hover {
+  background: var(--accent-blue-hover);
+}
+
+.failedIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+
+
+
+
+.fileUploadContainer {
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.fileInput {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.fileUploadLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border: 2px dashed var(--input-border-color);
+  border-radius: 8px;
+  background-color: var(--input-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+}
+
+.fileUploadLabel:hover {
+  border-color: var(--accent-blue);
+  background-color: var(--accent-blue-bg);
+}
+
+.fileInput:focus + .fileUploadLabel {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+.uploadIcon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.fileUploadLabel > span {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  color: var(--main-text-white-lighter);
+}
+
+.fileUploadLabel small {
+  color: var(--p-text);
+  font-size: 0.875rem;
+}
+
+.fileName {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--from-wrapper-color);
+  border: 1px solid var(--borders);
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: var(--main-text-white);
+  word-break: break-all;
+}
+
+/* Verification Summary Styles */
+.verificationSummary {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background-color: var(--input-color);
+  border-radius: 8px;
+  border: 1px solid var(--input-color);
+}
+
+.verificationSummary h4 {
+  margin-bottom: 1rem;
+  color: var(--main-text-white-lighter);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.summaryItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.summaryLabel {
+  font-size: 0.875rem;
+  color: var(--p-text);
+  font-weight: 500;
+}
+
+.summaryItem > span:last-child {
+  color: var(--main-text-white);
+  font-weight: 500;
+}
+
+/* Pending Animation for Teacher Approval */
+.pendingAnimation {
+  margin-bottom: 2rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.pendingIcon {
+  font-size: 5rem;
+  display: inline-block;
+  animation: rotate 3s linear infinite;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.pendingInfo {
+  background-color: var(--from-wrapper-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  text-align: right;
+  border: 1px solid var(--input-border-color);
+}
+
+.pendingInfo h3 {
+  margin-bottom: 1rem;
+  color: var(--main-text-white-lighter);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.pendingInfo ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pendingInfo li {
+  padding: 0.5rem 0;
+  padding-right: 1.75rem;
+  position: relative;
+  color: var(--p-text);
+  line-height: 1.5;
+}
+
+.pendingInfo li::before {
+  content: "✓";
+  position: absolute;
+  right: 0;
+  color: var(--success);
+  font-weight: bold;
+}
+
+.homeButton {
+  display: inline-block;
+  padding: 0.875rem 2rem;
+  background-color: var(--from-wrapper-color);
+  color: var(--main-text-white);
+  text-decoration: none;
+  border: 1px solid var(--input-border-color);
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.homeButton:hover {
+  background-color: var(--input-color);
+  border-color: var(--p-text);
+}
+
+/* Enhanced Verification Status - Update existing styles */
+.verificationStatus {
+  text-align: center;
+  padding: 2rem;
+}
+
+.statusMessage {
+  font-size: 1rem;
+  color: var(--main-text-white);
+  margin: 1rem 0;
+  line-height: 1.5;
+}
+
+.redirectMessage {
+  font-size: 0.875rem;
+  color: var(--p-text);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* Update retry button to match your theme */
+.retryButton {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--accent-blue);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.retryButton:hover {
+  background-color: var(--accent-blue-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--accent-blue);
+}
+
+/* Update failed icon animation */
+.failedIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+  }
+}
+
+/* Enhanced verified card */
+.verifiedCard {
+  background: var(--success-bg);
+  border: 1px solid var(--btn-primary);
+}
+
+/* File input error state */
+.fileInput.inputError + .fileUploadLabel {
+  border-color: var(--error);
+  background-color: var(--error-bg);
+}
+
+/* Update loading spinner to match theme */
+.loadingSpinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--borders);
+  border-top: 4px solid var(--accent-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+.successIcon {
+  color: var(--success);
+  animation: scaleInSuccess 0.5s ease-in-out;
+}
+
+@keyframes scaleInSuccess {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

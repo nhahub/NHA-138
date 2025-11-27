@@ -1,0 +1,327 @@
+/* app/teacher/profile/TeacherProfile.module.css */
+
+.container {
+  min-height: 100vh;
+  background: var(--main-color);
+  color: var(--main-text-white);
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  direction: rtl;
+}
+.container[dir="rtl"] {
+  font-family: var(--font-cairo), 'Noto Sans Arabic', sans-serif;
+}
+
+.main {
+  padding-top: 70px;
+  padding-bottom: 48px;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 70px);
+  gap: 24px;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #30363d;
+  border-top-color: var(--accent-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Profile Header */
+.profileHeader {
+  position: relative;
+  background: var(--sections-color);
+  border-bottom: 1px solid var(--borders);
+}
+
+.headerBackground {
+  height: 200px;
+  background: linear-gradient(135deg, var(--blue-darker) 0%, var(--accent-blue) 100%);
+  opacity: 0.3;
+}
+
+.headerContent {
+  position: relative;
+  max-width: 1200px;
+  margin: -100px auto 0;
+  padding: 0 24px 24px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 32px;
+  align-items: flex-end;
+}
+
+.profilePicture {
+  width: 150px;
+  height: 150px;
+  background: var(--main-color);
+  border: 4px solid var(--main-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  color: #6e7681;
+}
+
+.profileInfo {
+  padding-bottom: 12px;
+}
+
+.profileInfo h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  color: var(--main-text-white-lighter);
+}
+
+.profileTitle {
+  font-size: 18px;
+  color: var(--p-text);
+  margin: 0 0 12px;
+}
+
+.profileMeta {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: var(--p-text);
+}
+
+.profileMeta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profileActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.editButton,
+.saveButton,
+.cancelButton {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+  border: none;
+  font-size: 14px;
+}
+
+.editButton {
+  background: var(--btn-primary);
+  color: white;
+}
+
+.editButton:hover {
+  background: var(--btn-primary-hover);
+}
+
+.saveButton {
+  background: var(--btn-primary);
+  color: white;
+}
+
+.saveButton:hover:not(:disabled) {
+  background: var(--btn-primary-hover);
+}
+
+.saveButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  background: transparent;
+  color: var(--main-text-white);
+  border: 1px solid var(--borders);
+}
+
+.cancelButton:hover {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.profileStats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.statBox {
+  background: var(--main-color);;
+  border: 1px solid var(--borders);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  min-width: 150px;
+}
+
+.statBox h3 {
+  margin: 0 0 4px;
+  font-size: 24px;
+  color: var(--accent-blue);
+}
+
+.statBox p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--p-text);
+}
+
+/* Profile Content */
+.profileContent {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 24px;
+}
+
+/* Sections */
+.section {
+  background: var(--sections-color);
+  border: 1px solid var(--borders);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.section h2 {
+  margin: 0 0 20px;
+  font-size: 20px;
+  color: var(--main-text-white-lighter);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section p {
+  color: var(--p-text);
+  line-height: 1.6;
+}
+
+/* Form Elements */
+.input {
+  width: 100%;
+  background: var(--main-color);
+  border: 1px solid var(--borders);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--main-text-white);
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--accent-blue-bg);
+}
+
+/* CV Section */
+.cvSection {
+  padding: 20px;
+  background: var(--main-color);
+  border-radius: 8px;
+  border: 2px dashed var(--borders);
+  transition: all 0.3s;
+}
+
+.cvUploaded {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cvIcon {
+  font-size: 48px;
+  color: var(--error);
+}
+
+.cvInfo {
+  flex: 1;
+}
+
+.cvInfo p {
+  margin: 0 0 12px;
+  font-size: 16px;
+  color: var(--main-text-white-lighter);
+}
+
+.cvActions {
+  display: flex;
+  gap: 12px;
+}
+
+.replaceButton,
+.uploadButton {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+  border: none;
+  font-size: 14px;
+  background: var(--btn-primary);
+  color: white;
+}
+
+.replaceButton:hover,
+.uploadButton:hover:not(:disabled) {
+  background: var(--btn-primary-hover);
+}
+
+.uploadButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cvUpload {
+  text-align: center;
+  padding: 40px;
+}
+
+.uploadIcon {
+  font-size: 48px;
+  color: #6e7681;
+  margin-bottom: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .headerContent {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .profilePicture {
+    margin: 0 auto;
+  }
+
+  .profileActions {
+    justify-content: center;
+  }
+}

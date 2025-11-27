@@ -1,0 +1,239 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--main-color);
+  overflow: hidden;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  direction: rtl;
+}
+.container[dir="rtl"] {
+  font-family: var(--font-cairo), 'Noto Sans Arabic', sans-serif;
+}
+
+.header {
+  padding: 1.5rem 2rem;
+  background: var(--sections-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--borders);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.leaveButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--error);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px var(--error);
+}
+
+.leaveButton:hover {
+  background: #da3633;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(248, 81, 73, 0.4);
+}
+
+.leaveButton:active {
+  transform: translateY(0);
+}
+
+.leaveButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+.videoContainer {
+  flex: 1;
+  width: 100%;
+  background: var(--main-color);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ensure Jitsi iframe takes full space */
+.videoContainer iframe {
+  border: none;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Loading state */
+.loading {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--main-text-white);
+  gap: 1.5rem;
+  background: var(--main-color);
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid #30363d;
+  border-top-color: var(--accent-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading p {
+  font-size: 1.1rem;
+  color: var(--p-text);
+  margin: 0;
+}
+
+/* Error state */
+.error {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  background: var(--main-color);
+}
+
+.errorIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  filter: grayscale(100%);
+  opacity: 0.7;
+}
+
+.error h2 {
+  font-size: 1.8rem;
+  margin: 0 0 1rem 0;
+  color: var(--error);
+}
+
+.error p {
+  font-size: 1.1rem;
+  color: var(--p-text);
+  margin: 0 0 2rem 0;
+  max-width: 500px;
+}
+
+.errorButton {
+  padding: 0.75rem 1.5rem;
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.errorButton:hover {
+  background: var(--accent-blue-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--accent-blue);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem 1.5rem;
+  }
+  
+  .header h1 {
+    font-size: 1.2rem;
+  }
+  
+  .leaveButton {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .leaveButton span {
+    display: none;
+  }
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .loading p {
+    font-size: 1rem;
+  }
+  
+  .error h2 {
+    font-size: 1.5rem;
+  }
+  
+  .error p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .header h1 {
+    font-size: 1rem;
+  }
+  
+  .leaveButton {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .leaveButton svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .errorIcon {
+    font-size: 3rem;
+  }
+  
+  .error h2 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Accessibility */
+button:focus {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+/* Prevent text selection in the entire component */
+.container * {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
