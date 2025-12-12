@@ -24,6 +24,8 @@ import {
 import Image from "next/image";
 
 import { useLanguage } from "@/hooks/useLanguage";
+import { Search } from "lucide-react";
+
 interface Course {
   id: number;
   title: string;
@@ -101,6 +103,7 @@ export default function UniversityStudentDashboard() {
   const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [profileStats, setProfileStats] = useState<ProfileStats>({
     profile_views: 0,
@@ -128,11 +131,20 @@ export default function UniversityStudentDashboard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Debounce search query to avoid API calls on every keystroke
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
   useEffect(() => {
     setCurrentPage(1);
     fetchDashboardData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchQuery, selectedCategory]);
+  }, [debouncedSearchQuery, selectedCategory]);
 
   const checkAuth = async () => {
     const userData = localStorage.getItem("user");
@@ -220,8 +232,8 @@ export default function UniversityStudentDashboard() {
         params.append("category", selectedCategory);
       }
 
-      if (searchQuery) {
-        params.append("search", searchQuery);
+      if (debouncedSearchQuery) {
+        params.append("search", debouncedSearchQuery);
       }
 
       const coursesResponse = await fetch(
@@ -310,14 +322,14 @@ export default function UniversityStudentDashboard() {
   };
 
   const categories = [
-    { value: "all", label: t("universityStudent.allSpecializations"), icon: "📚" },
-    { value: "programming", label: t("universityStudent.programming"), icon: "💻" },
-    { value: "business", label: t("universityStudent.business"), icon: "💼" },
-    { value: "design", label: t("universityStudent.design"), icon: "🎨" },
-    { value: "marketing", label: t("universityStudent.marketing"), icon: "📈" },
-    { value: "data", label: t("universityStudent.dataAnalysis"), icon: "📊" },
-    { value: "languages", label: t("universityStudent.languages"), icon: "🌍" },
-    { value: "soft_skills", label: t("universityStudent.softSkills"), icon: "🤝" },
+    { value: "all", label: t("universityStudent.allSpecializations")},
+    { value: "programming", label: t("universityStudent.programming")},
+    { value: "business", label: t("universityStudent.business")},
+    { value: "design", label: t("universityStudent.design")},
+    { value: "marketing", label: t("universityStudent.marketing")},
+    { value: "data", label: t("universityStudent.dataAnalysis")},
+    { value: "languages", label: t("universityStudent.languages")},
+    { value: "soft_skills", label: t("universityStudent.softSkills")},
   ];
 
   if (loading) {
@@ -511,7 +523,6 @@ export default function UniversityStudentDashboard() {
                 }`}
                 onClick={() => setSelectedCategory(category.value)}
               >
-                <span className={styles.categoryIcon}>{category.icon}</span>
                 <span>{category.label}</span>
               </button>
             ))}
@@ -550,7 +561,7 @@ export default function UniversityStudentDashboard() {
 
           {filteredCourses.length === 0 ? (
             <div className={styles.noResults}>
-              <span className={styles.noResultsIcon}>🔍</span>
+              <span className={styles.noResultsIcon}><Search size={48} /></span>
               <h3>{t("universityStudent.noResults")}</h3>
               <p>{t("universityStudent.tryDifferentSearch")}</p>
             </div>

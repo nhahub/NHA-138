@@ -6,6 +6,9 @@ import StudentNav from "@/components/StudentNav/StudentNav";
 import styles from "./MyCourses.module.css";
 import { FaSearch, FaBook, FaClock, FaUsers, FaStar, FaCalendarAlt, FaChalkboardTeacher, FaTimes } from "react-icons/fa";
 import { useLanguage } from "@/hooks/useLanguage";
+import { BookOpen, GraduationCap, Target, Circle } from "lucide-react";
+import Image from "next/image";
+
 interface Teacher {
   id: number;
   first_name: string;
@@ -164,16 +167,16 @@ export default function MyCourses() {
 
   const getCategoryLabel = (category: string) => {
     const categoryLabels: { [key: string]: { label: string; icon: string } } = {
-      arabic: { label: t("subjects.arabic"), icon: "📝" },
-      english: { label: t("subjects.english"), icon: "🌍" },
-      math: { label: t("subjects.math"), icon: "🔢" },
-      science: { label: t("subjects.science"), icon: "🔬" },
-      social: { label: t("subjects.social"), icon: "🗺️" },
-      religion: { label: t("subjects.religion"), icon: "🕌" },
-      french: { label: t("subjects.french"), icon: "🇫🇷" },
-      german: { label: t("subjects.german"), icon: "🇩🇪" },
+      arabic: { label: t("subjects.arabic"), icon: "" },
+      english: { label: t("subjects.english"), icon: "" },
+      math: { label: t("subjects.math"), icon: "" },
+      science: { label: t("subjects.science"), icon: "" },
+      social: { label: t("subjects.social"), icon: "" },
+      religion: { label: t("subjects.religion"), icon: "" },
+      french: { label: t("subjects.french"), icon: "" },
+      german: { label: t("subjects.german"), icon: "" },
     };
-    return categoryLabels[category || ''] || { label: category || t("subjects.general"), icon: "📚" };
+    return categoryLabels[category || ''] || { label: category || t("subjects.general")};
   };
 
   if (loading) {
@@ -201,21 +204,21 @@ export default function MyCourses() {
           </div>
           <div className={styles.statsCards}>
             <div className={styles.statCard}>
-              <div className={styles.statIcon}>📚</div>
+              <div className={styles.statIcon}><BookOpen size={32} /></div>
               <div className={styles.statInfo}>
                 <h3>{courses.length}</h3>
                 <p>{t("student.coursesEnrolled")}</p>
               </div>
             </div>
             <div className={styles.statCard}>
-              <div className={styles.statIcon}>👨‍🏫</div>
+              <div className={styles.statIcon}><GraduationCap size={32} /></div>
               <div className={styles.statInfo}>
                 <h3>{new Set(courses.map(c => c.teacher.id)).size}</h3>
                 <p>{t("student.teachersAvailable")}</p>
               </div>
             </div>
             <div className={styles.statCard}>
-              <div className={styles.statIcon}>🎯</div>
+              <div className={styles.statIcon}><Target size={32} /></div>
               <div className={styles.statInfo}>
                 <h3>
                   {courses.filter(course => course.course_type === 'live').length}
@@ -260,7 +263,7 @@ export default function MyCourses() {
 
           {filteredCourses.length === 0 ? (
             <div className={styles.noResults}>
-              <span className={styles.noResultsIcon}>📚</span>
+              <span className={styles.noResultsIcon}><BookOpen size={48} /></span>
               <h3>{t("student.noCourses")}</h3>
               <p>
                 {searchQuery
@@ -288,7 +291,19 @@ export default function MyCourses() {
                       onClick={() => router.push(`/student/courses/${course.id}`)} 
                       className={`${styles.courseThumbnail} ${styles.cursorPointer}`}
                     >
-                      <img src={course.thumbnail || "/api/placeholder/320/180"}/>
+                      {course.thumbnail ? (
+                        <Image
+                          src={course.thumbnail}
+                          alt={course.title}
+                          width={320}
+                          height={180}
+                          style={{ objectFit: 'cover' }}
+                        />
+                      ) : (
+                        <div className={styles.placeholderImage}>
+                          <FaBook />
+                        </div>
+                      )}
                       <div className={styles.courseCategory}>
                         {category.icon} {category.label}
                       </div>
@@ -297,7 +312,7 @@ export default function MyCourses() {
                       {course.course_type === 'live' && (
                         <>
                           <div className={styles.liveBadge}>
-                            <span>🔴</span> {t("student.liveStream")}
+                            <Circle className="text-red-500 fill-red-500" size={12} /> {t("student.liveStream")}
                           </div>
                           {course.is_full && (
                             <div className={styles.seatsInfo}>

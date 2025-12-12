@@ -22,6 +22,8 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import { useLanguage } from "@/hooks/useLanguage";
+import { Circle } from "lucide-react";
+
 interface Course {
   id: number;
   title: string;
@@ -310,8 +312,8 @@ export default function TeacherDashboard() {
             </div>
 
             <div className={styles.statCard}>
-              <div className={styles.statIcon} style={{ background: 'rgba(63, 185, 80, 0.1)' }}>
-                <FaUsers style={{ color: '#3fb950' }} />
+              <div className={styles.statIcon} style={{ background: 'rgba(88, 166, 255, 0.1)' }}>
+                <FaUsers style={{ color: '#58a6ff' }} />
               </div>
               <div className={styles.statInfo}>
                 <h3>{stats?.total_students || 0}</h3>
@@ -324,8 +326,8 @@ export default function TeacherDashboard() {
             </div>
 
             <div className={styles.statCard}>
-              <div className={styles.statIcon} style={{ background: 'rgba(248, 81, 73, 0.1)' }}>
-                <FaMoneyBillWave style={{ color: '#f85149' }} />
+              <div className={styles.statIcon} style={{ background: 'rgba(88, 166, 255, 0.1)' }}>
+                <FaMoneyBillWave style={{ color: '#58a6ff' }} />
               </div>
               <div className={styles.statInfo}>
                 <h3>{stats?.total_revenue || 0}{t("teacher.egp")}</h3>
@@ -338,8 +340,8 @@ export default function TeacherDashboard() {
             </div>
 
             <div className={styles.statCard}>
-              <div className={styles.statIcon} style={{ background: 'rgba(255, 215, 0, 0.1)' }}>
-                <FaStar style={{ color: '#ffd700' }} />
+              <div className={styles.statIcon} style={{ background: 'rgba(88, 166, 255, 0.1)' }}>
+                <FaStar style={{ color: '#58a6ff' }} />
               </div>
               <div className={styles.statInfo}>
                 <h3>{stats?.average_rating || 0}</h3>
@@ -422,7 +424,7 @@ export default function TeacherDashboard() {
                     )}
                     {course.course_type === 'live' && (
                       <div className={styles.liveBadge}>
-                        <span>🔴</span>  {t("teacher.live")}
+                        <Circle className="text-red-500 fill-red-500" size={12} />  {t("teacher.live")}
                       </div>
                     )}
                     {!course.is_active && (
@@ -447,7 +449,7 @@ export default function TeacherDashboard() {
                       </div>
                       <div className={styles.courseStat}>
                         <FaBook />
-                        <span>{course.lessons_count} {t("teacher.course")}</span>
+                        <span>{course.lessons_count} {t("universityStudent.courses")}</span>
                       </div>
                       <div className={styles.courseStat}>
                         <FaClock />

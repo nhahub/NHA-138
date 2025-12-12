@@ -2,11 +2,9 @@
   min-height: 100vh;
   background: var(--main-color);
   color: var(--main-text-white);
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .container[dir="rtl"] {
-  font-family: var(--font-cairo), 'Noto Sans Arabic', sans-serif;
 }
 
 .main {
@@ -222,6 +220,10 @@
 .emptyState {
   text-align: center;
   padding: 80px 24px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .emptyIcon {

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import AdminNav from "@/components/AdminNav/AdminNav";
+import Pagination from "@/components/Pagination/Pagination";
 import styles from "./Teachers.module.css";
 import {
   FaChalkboardTeacher,
@@ -39,11 +40,15 @@ export default function TeachersPage() {
   const [selectedTeacher, setSelectedTeacher] = useState<Teacher | null>(null);
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [rejectReason, setRejectReason] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [lastPage, setLastPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [perPage, setPerPage] = useState(20);
 
   useEffect(() => {
     checkAuth();
     fetchTeachers();
-  }, [filter]);
+  }, [filter, currentPage]);
 
   const checkAuth = () => {
     const userData = localStorage.getItem("user");
@@ -67,8 +72,8 @@ export default function TeachersPage() {
       const authData = JSON.parse(localStorage.getItem("authData") || "{}");
 
       const endpoint = filter === 'pending'
-        ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/teachers/pending`
-        : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/users?user_type=teacher${filter === 'approved' ? '&is_approved=1' : ''}`;
+        ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/teachers/pending?page=${currentPage}`
+        : `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/users?user_type=teacher${filter === 'approved' ? '&is_approved=1' : ''}&page=${currentPage}`;
 
       const response = await fetch(endpoint, {
         headers: {
@@ -80,9 +85,19 @@ export default function TeachersPage() {
       if (response.ok) {
         const data = await response.json();
         if (filter === 'pending') {
-          setTeachers(data.teachers.data || data.teachers);
+          const paginatedData = data.teachers;
+          setTeachers(paginatedData.data || data.teachers);
+          setCurrentPage(paginatedData.current_page || 1);
+          setLastPage(paginatedData.last_page || 1);
+          setTotal(paginatedData.total || 0);
+          setPerPage(paginatedData.per_page || 20);
         } else {
-          setTeachers(data.data.data || data.data);
+          const paginatedData = data.data;
+          setTeachers(paginatedData.data || data.data);
+          setCurrentPage(paginatedData.current_page || 1);
+          setLastPage(paginatedData.last_page || 1);
+          setTotal(paginatedData.total || 0);
+          setPerPage(paginatedData.per_page || 15);
         }
       }
     } catch (error) {
@@ -107,20 +122,16 @@ export default function TeachersPage() {
       );
 
       if (response.ok) {
-        alert(t("admin.teachers.teacherApprovedSuccess"));
         fetchTeachers();
       } else {
-        alert(t("admin.teachers.failedToApprove"));
       }
     } catch (error) {
       console.error("Error approving teacher:", error);
-      alert(t("admin.teachers.errorApprovingTeacher"));
     }
   };
 
   const rejectTeacher = async () => {
     if (!selectedTeacher || !rejectReason.trim()) {
-      alert(t("admin.teachers.provideReason"));
       return;
     }
 
@@ -140,17 +151,14 @@ export default function TeachersPage() {
       );
 
       if (response.ok) {
-        alert(t("admin.teachers.teacherRejectedSuccess"));
         setShowRejectModal(false);
         setRejectReason("");
         setSelectedTeacher(null);
         fetchTeachers();
       } else {
-        alert(t("admin.teachers.failedToReject"));
       }
     } catch (error) {
       console.error("Error rejecting teacher:", error);
-      alert(t("admin.teachers.errorRejectingTeacher"));
     }
   };
 
@@ -177,12 +185,19 @@ export default function TeachersPage() {
         window.URL.revokeObjectURL(url);
         document.body.removeChild(a);
       } else {
-        alert(t("admin.teachers.cvNotFound"));
       }
     } catch (error) {
       console.error("Error downloading CV:", error);
-      alert(t("admin.teachers.errorDownloadingCV"));
     }
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleFilterChange = (newFilter: 'all' | 'pending' | 'approved') => {
+    setFilter(newFilter);
+    setCurrentPage(1);
   };
 
   if (loading) {
@@ -214,19 +229,19 @@ export default function TeachersPage() {
         <div className={styles.filters}>
           <button
             className={`${styles.filterBtn} ${filter === 'pending' ? styles.active : ''}`}
-            onClick={() => setFilter('pending')}
+            onClick={() => handleFilterChange('pending')}
           >
             {t("admin.teachers.pendingApproval")}
           </button>
           <button
             className={`${styles.filterBtn} ${filter === 'approved' ? styles.active : ''}`}
-            onClick={() => setFilter('approved')}
+            onClick={() => handleFilterChange('approved')}
           >
             {t("admin.teachers.approved")}
           </button>
           <button
             className={`${styles.filterBtn} ${filter === 'all' ? styles.active : ''}`}
-            onClick={() => setFilter('all')}
+            onClick={() => handleFilterChange('all')}
           >
             {t("admin.teachers.allTeachers")}
           </button>
@@ -306,6 +321,13 @@ export default function TeachersPage() {
                 ))}
               </tbody>
             </table>
+            <Pagination
+              currentPage={currentPage}
+              lastPage={lastPage}
+              total={total}
+              perPage={perPage}
+              onPageChange={handlePageChange}
+            />
           </div>
         )}
       </main>

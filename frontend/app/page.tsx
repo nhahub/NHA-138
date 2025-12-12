@@ -4,39 +4,132 @@ import styles from "./Landing.module.css";
 import Link from "next/link";
 import NavigationBar from "@/components/Nav/Nav";
 import { useLanguage } from "@/hooks/useLanguage";
+import { BookOpen, Target, FileEdit, DollarSign } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function LandingPage() {
   const { t, dir } = useLanguage();
+  const heroRef = useRef<HTMLElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [iframeScrollState, setIframeScrollState] = useState({
+    isAtTop: true,
+    isAtBottom: false
+  });
+  const [allowParentScroll, setAllowParentScroll] = useState(false);
+
+  // Listen for messages from iframe
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data && event.data.type === 'iframeScrollState') {
+        setIframeScrollState({
+          isAtTop: event.data.isAtTop,
+          isAtBottom: event.data.isAtBottom
+        });
+      } else if (event.data && event.data.type === 'iframeScrollComplete') {
+        // Iframe has finished scrolling in a direction
+        if (event.data.direction === 'down') {
+          // Allow parent page to scroll down
+          setAllowParentScroll(true);
+        } else if (event.data.direction === 'up') {
+          // When iframe signals scroll complete upward while at top,
+          // we would handle this if parent were scrolled
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
+  // Lock body scroll when hero is active and iframe hasn't finished scrolling
+  useEffect(() => {
+    // If we're at the top of the page and iframe hasn't reached bottom, lock scroll
+    if (!allowParentScroll && window.scrollY === 0) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [allowParentScroll]);
+
+  // Handle scroll to unlock when iframe signals completion
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      // If parent scroll is not allowed yet, the body overflow is hidden
+      // so we don't need to preventDefault here
+
+      // Scrolling up when at top of page
+      if (e.deltaY < 0 && window.scrollY <= 0) {
+        // If iframe is not at top, reset the scroll allowance
+        if (!iframeScrollState.isAtTop && allowParentScroll) {
+          setAllowParentScroll(false);
+        }
+      }
+    };
+
+    window.addEventListener('wheel', handleWheel, { passive: true });
+    return () => window.removeEventListener('wheel', handleWheel);
+  }, [iframeScrollState, allowParentScroll]);
+
+  // Reset allowParentScroll when iframe goes back to top
+  useEffect(() => {
+    if (iframeScrollState.isAtTop && window.scrollY === 0) {
+      setAllowParentScroll(false);
+    }
+  }, [iframeScrollState.isAtTop]);
+
+  // Handle touch events for mobile
+  useEffect(() => {
+    let touchStartY = 0;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      const deltaY = touchStartY - e.changedTouches[0].clientY;
+
+      // Scrolling up on mobile when at top
+      if (deltaY < -30 && window.scrollY <= 0) {
+        if (!iframeScrollState.isAtTop && allowParentScroll) {
+          setAllowParentScroll(false);
+        }
+      }
+    };
+
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [iframeScrollState, allowParentScroll]);
 
   return (
     <div className={styles.container} dir={dir} style={{ textAlign: dir === 'rtl' ? 'right' : 'left' }}>
       <NavigationBar />
 
-      {/* Hero Section */}
-      <section className={styles.hero}>
-        <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>
-            <div className={styles.heroTitleFirst}>Edvance</div>
-            {t("landing.heroTitle")}
-            <br />
-            <span className={styles.heroGradient}>{t("landing.heroGradient")}</span>
-          </h1>
-          <p className={styles.heroDescription}>
-            {t("landing.heroDescription")}
-            <br />
-            {t("landing.heroSubDescription")}
-          </p>
-
-          <div className={styles.heroButtons}>
-            <Link href="/signup" className={styles.primaryButton}>
-              {t("landing.registerAsStudent")}
-            </Link>
-            
-            <Link href="/company/register" className={styles.secondaryButton}>
-              {t("landing.joinAsCompany")}
-            </Link>
-          </div>
-        </div>
+      {/* Hero Section with 3D Scene in iframe */}
+      <section className={styles.hero} ref={heroRef}>
+        <iframe
+          ref={iframeRef}
+          src="/index2.html"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            border: 'none',
+            pointerEvents: 'auto'
+          }}
+          title="3D Experience"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+        />
       </section>
 
       {/* Features Section */}
@@ -45,22 +138,22 @@ export default function LandingPage() {
           <h2>{t("landing.whyEdvance")}</h2>
           <div className={styles.featuresGrid}>
             <div className={styles.feature}>
-              <div className={styles.featureIcon}>📚</div>
+              <div className={styles.featureIcon}><BookOpen size={32} /></div>
               <h3>{t("landing.feature1Title")}</h3>
               <p>{t("landing.feature1Description")}</p>
             </div>
             <div className={styles.feature}>
-              <div className={styles.featureIcon}>🎯</div>
+              <div className={styles.featureIcon}><Target size={32} /></div>
               <h3>{t("landing.feature2Title")}</h3>
               <p>{t("landing.feature2Description")}</p>
             </div>
             <div className={styles.feature}>
-              <div className={styles.featureIcon}>📝</div>
+              <div className={styles.featureIcon}><FileEdit size={32} /></div>
               <h3>{t("landing.feature3Title")}</h3>
               <p>{t("landing.feature3Description")}</p>
             </div>
             <div className={styles.feature}>
-              <div className={styles.featureIcon}>🆓</div>
+              <div className={styles.featureIcon}><DollarSign size={32} /></div>
               <h3>{t("landing.feature4Title")}</h3>
               <p>{t("landing.feature4Description")}</p>
             </div>
