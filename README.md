@@ -6,6 +6,7 @@
 - **[Live Platform](https://edvance-ace.vercel.app)** - Fully functional deployed application
 - **[Documentation](https://drive.google.com/file/d/1Kmc7LNSFSHOz7bu8w7IkSFMTN0NUxXRO/view?usp=sharing)** — Complete project documentation with ERD, screenshots, and technical details
 - **[Presentation PDF](https://drive.google.com/file/d/1U7QieFolTmTjrc1kD8M2k2tvdo5oSasq/view?usp=sharing)** — Project presentation slides
+- **[Postman API Collection](https://documenter.getpostman.com/view/37731054/2sB3dLVCTz)** — Project Postman API Collection
 
 ### Users' Accounts to Access the Platform
 
