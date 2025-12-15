@@ -45,9 +45,9 @@
 ## Features
 
 ## Special Features
-- Web Scraping using JSearch
-- AI integration using Google Gemini
 - Face & Identity Verification using DIDIT
+- AI integration using Google Gemini
+- Web Scraping using JSearch
 - Academic Email OTP using MailGun
 - Live Stream Using Jitsi
 - Payment Gateways Using Stripe and PayPal Integration
