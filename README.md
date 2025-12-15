@@ -6,6 +6,7 @@
 - **[Live Platform](https://edvance-ace.vercel.app)** - Fully functional deployed application
 - **[Documentation](https://drive.google.com/file/d/1Kmc7LNSFSHOz7bu8w7IkSFMTN0NUxXRO/view?usp=sharing)** — Complete project documentation with ERD, screenshots, and technical details
 - **[Presentation PDF](https://drive.google.com/file/d/1U7QieFolTmTjrc1kD8M2k2tvdo5oSasq/view?usp=sharing)** — Project presentation slides
+- **[Postman API Collection](https://documenter.getpostman.com/view/37731054/2sB3dLVCTz)** — Project Postman API Collection
 
 ### Users' Accounts to Access the Platform
 
@@ -44,14 +45,86 @@
 ## Features
 
 ## Special Features
-- Web Scraping using JSearch
-- AI integration using Google Gemini
 - Face & Identity Verification using DIDIT
+- AI integration using Google Gemini
+- Web Scraping using JSearch
+- Notifications System
 - Academic Email OTP using MailGun
 - Live Stream Using Jitsi
 - Payment Gateways Using Stripe and PayPal Integration
+- Multi-language Support
+- Dark & Light Themes
+- Profile & Media Management
 
 ## Detailed Features
+
+### Face & Identity Verification (Didit)
+- **Identity Verification** — Didit integration for document verification, face matching, liveness detection, and AML checks
+- **Document Verification** — Upload and verify government-issued IDs
+- **Face Matching** — Compare selfie with ID photo for identity confirmation
+- **Liveness Detection** — Ensure real-time presence to prevent fraud
+- **AML Checks** — Anti-money laundering verification for compliance
+- **Parent Verification** — Didit verification required for parent accounts
+- **Teacher Verification** — Identity verification for teacher applications
+- **Verification Review** — Admin can check Didit verification data
+
+### AI Integration (Google Gemini)
+- **AI Chat Interface** — Interactive chat with AI career mentor powered by Google Gemini
+- **Career Conversations** — General career guidance and advice
+- **CV Analysis** — AI-powered CV review and feedback
+- **Learning Path Generation** — Personalized learning recommendations
+- **Job Recommendations** — AI-suggested job opportunities
+- **Skills Gap Analysis** — Identify skills to develop
+- **Conversation History** — Access last 50 messages
+- **Conversation Types** — Select conversation focus
+- **Profile Context** — AI uses profile data for personalized responses
+- **Clear History** — Reset conversation history
+
+### Web Scraping (JSearch API)
+- **External Job Listings** — Access external jobs via JSearch API integration
+- **Real-time Job Data** — Fetch up-to-date job postings from multiple sources
+- **Job Search Integration** — Search external job markets by keywords and location
+- **Job Filtering** — Filter external jobs by location, job type, and experience level
+- **Seamless Integration** — External jobs displayed alongside platform job postings
+
+### Notifications System
+- **Database Notifications** — Persistent notification storage
+- **Email Notifications** — Email alerts for important events
+- **Welcome Notifications** — Onboarding notifications for new users
+- **Follow Request Alerts** — Notifications for parent-student linking
+- **Job Posting Alerts** — Notify relevant students about new jobs
+- **Application Updates** — Status change notifications
+- **Teacher Notifications** — Approval and rejection alerts
+- **Notification Management** — View, mark read, and delete notifications
+- **Unread Count** — Track unread notification count
+- **Bulk Actions** — Mark all as read, delete all read
+
+### Academic Email OTP (Mailgun)
+- **Email Verification** — OTP-based email verification system via Mailgun
+- **Academic Email Validation** — University domain verification for academic accounts
+- **OTP Delivery** — Secure one-time password delivery to email
+- **Password Recovery** — Secure password reset via email tokens
+- **Welcome Emails** — Automated welcome messages for new users
+- **Notification Emails** — Email alerts for important events
+- **Transactional Email** — Reliable email delivery through Mailgun API
+
+### Live Streaming (Jitsi)
+- **Jitsi Integration** — Video conferencing support for live classes
+- **Agora Integration** — Real-time video streaming alternative
+- **Live Sessions** — Schedule and host live class sessions
+- **Session Status** — Track scheduled, live, completed, and cancelled sessions
+- **Real-time Attendance** — Track student attendance during sessions
+- **Live Chat** — In-session messaging for teachers and students
+- **Role-based Access** — Teachers as hosts, students as participants
+
+### Payment Gateways (Stripe & PayPal)
+- **Stripe Integration** — Secure card payment processing
+- **PayPal Integration** — Alternative payment method
+- **Payment Intent** — Create and confirm payment intents
+- **Currency Conversion** — EGP to USD conversion for PayPal
+- **Payment History** — Track all transactions
+- **Transaction IDs** — Unique identifiers for payments
+- **Webhook Handling** — Automated payment confirmation
 
 ### Authentication & Security
 - **User Registration** — Role-based registration for Students, Teachers, Parents, University Students, and Companies
@@ -64,6 +137,21 @@
 - **Academic Email Validation** — University domain verification for academic accounts
 - **Account Status Management** — Active, suspended, and pending account states
 - **Remember Me** — Extended session tokens (90-day expiration)
+
+### Profile & Media Management
+- **Profile Pictures** — Upload for all user types (JPEG, PNG, JPG, GIF)
+- **CV Documents** — Upload PDF, DOC, DOCX files (5MB max)
+- **Video Content** — Upload videos or link external URLs
+- **Thumbnails** — Course and lesson thumbnail images
+- **Company Logos** — Company branding images
+- **File Validation** — Type and size validation
+- **Auto Cleanup** — Delete old files on update
+
+### Multi-language Support
+- **Arabic Support** — Full Arabic language interface
+- **English Support** — Complete English localization
+- **Localized Notifications** — Language-specific notification text
+- **RTL Support** — Right-to-left layout for Arabic
 
 ### Student Features
 - **Student Dashboard** — Personalized dashboard with enrolled courses and progress tracking
@@ -177,63 +265,6 @@
 - **Revenue Analytics** — Track platform revenue
 - **Activity Monitoring** — View recent platform activity
 - **Admin Creation** — Create new admin accounts
-
-### AI Career Mentor
-- **AI Chat Interface** — Interactive chat with AI career mentor
-- **Career Conversations** — General career guidance and advice
-- **CV Analysis** — AI-powered CV review and feedback
-- **Learning Path Generation** — Personalized learning recommendations
-- **Job Recommendations** — AI-suggested job opportunities
-- **Skills Gap Analysis** — Identify skills to develop
-- **Conversation History** — Access last 50 messages
-- **Conversation Types** — Select conversation focus
-- **Profile Context** — AI uses profile data for personalized responses
-- **Clear History** — Reset conversation history
-
-### Live Streaming & Video
-- **Agora Integration** — Real-time video streaming for live classes
-- **Jitsi Fallback** — Alternative video conferencing support
-- **Live Sessions** — Schedule and host live class sessions
-- **Session Status** — Track scheduled, live, completed, and cancelled sessions
-- **Real-time Attendance** — Track student attendance during sessions
-- **Live Chat** — In-session messaging for teachers and students
-- **Role-based Access** — Teachers as hosts, students as participants
-
-### Payment System
-- **Stripe Integration** — Secure card payment processing
-- **PayPal Integration** — Alternative payment method
-- **Payment Intent** — Create and confirm payment intents
-- **Currency Conversion** — EGP to USD conversion for PayPal
-- **Payment History** — Track all transactions
-- **Transaction IDs** — Unique identifiers for payments
-- **Webhook Handling** — Automated payment confirmation
-
-### Notifications System
-- **Database Notifications** — Persistent notification storage
-- **Email Notifications** — Email alerts for important events
-- **Welcome Notifications** — Onboarding notifications for new users
-- **Follow Request Alerts** — Notifications for parent-student linking
-- **Job Posting Alerts** — Notify relevant students about new jobs
-- **Application Updates** — Status change notifications
-- **Teacher Notifications** — Approval and rejection alerts
-- **Notification Management** — View, mark read, and delete notifications
-- **Unread Count** — Track unread notification count
-- **Bulk Actions** — Mark all as read, delete all read
-
-### Profile & Media Management
-- **Profile Pictures** — Upload for all user types (JPEG, PNG, JPG, GIF)
-- **CV Documents** — Upload PDF, DOC, DOCX files (5MB max)
-- **Video Content** — Upload videos or link external URLs
-- **Thumbnails** — Course and lesson thumbnail images
-- **Company Logos** — Company branding images
-- **File Validation** — Type and size validation
-- **Auto Cleanup** — Delete old files on update
-
-### Multi-language Support
-- **Arabic Support** — Full Arabic language interface
-- **English Support** — Complete English localization
-- **Localized Notifications** — Language-specific notification text
-- **RTL Support** — Right-to-left layout for Arabic
 
 ---
 
